@@ -19,18 +19,23 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://sspaino.github.io/archives/2023/index.html">
+    <meta name="description" content="VASP是维也纳大学Hafner小组开发的进行电子结构计算和量子力学-分子动力学模拟软件包。它是目前材料模拟和计算物质科学研究中最流行的商用软件之一。VASP通过近似求解Schrödinger方程得到体系的电子态和能量，既可以在密度泛函理论（DFT）框架内求解Kohn-Sham方程(已实现了混合（hybrid）泛函计算)，也可以在Hartree-Fock（HF）的近似下求解Roothaan方程。此">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下安装intel全家桶（oneapi）和vasp">
+<meta property="og:url" content="https://sspaino.github.io/2023/03/05/3/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="VASP是维也纳大学Hafner小组开发的进行电子结构计算和量子力学-分子动力学模拟软件包。它是目前材料模拟和计算物质科学研究中最流行的商用软件之一。VASP通过近似求解Schrödinger方程得到体系的电子态和能量，既可以在密度泛函理论（DFT）框架内求解Kohn-Sham方程(已实现了混合（hybrid）泛函计算)，也可以在Hartree-Fock（HF）的近似下求解Roothaan方程。此">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-05T05:02:22.000Z">
+<meta property="article:modified_time" content="2023-03-05T12:18:28.499Z">
 <meta property="article:author" content="Dr.SHI">
+<meta property="article:tag" content="vasp">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Dr.SHI&#39;s Studio</title>
+    <title>linux下安装intel全家桶（oneapi）和vasp · Dr.SHI&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -217,6 +222,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -246,6 +253,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Dr.SHI&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">linux下安装intel全家桶（oneapi）和vasp</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
@@ -272,24 +290,80 @@
 
 
 
+    height:50vh;
+
 ">
     
     <!-- 主页  -->
     
+        
+    <!-- 404页  -->
+    
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/wallhaven-l3xk6q.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                linux下安装intel全家桶（oneapi）和vasp
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="vasp">vasp</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">934</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2023/03/05</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -419,122 +493,86 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>VASP是维也纳大学Hafner小组开发的进行电子结构计算和量子力学-分子动力学模拟软件包。它是目前材料模拟和计算物质科学研究中最流行的商用软件之一。VASP通过近似求解Schrödinger方程得到体系的电子态和能量，既可以在密度泛函理论（DFT）框架内求解Kohn-Sham方程(已实现了混合（hybrid）泛函计算)，也可以在Hartree-Fock（HF）的近似下求解Roothaan方程。此外，VASP也支持格林函数方法（GW准粒子近似，ACFDT-RPA）和微扰理论（二阶Møller-Plesset）。VASP使用平面波基组，电子与离子间的相互作用使用模守恒赝势（NCPP）、超软赝势（USPP）或投影扩充波（PAW）方法描述。VASP使用高效的矩阵对角化技术求解电子基态。在迭代求解过程中采用了Broyden和Pulay密度混合方案加速自洽循环的收敛。VASP可以自动确定任意构型的对称性。利用对称性可方便地设定Monkhorst-Pack特殊点，可用于高效地计算体材料和对称团簇。Brillouin区的积分使用模糊方法或Blöchl改进的四面体布点-积分方法，实现更快的k点收敛。上面涉及很多固体物理的知识，非常不直观，且难以理解。但是没有关系，用一句换总结VASP的功能就是，计算材料内部的电子结构，并计算以此为基础的各种材料物性。<br>OneAPI是英特尔在生态布局中最重要的一环，这已经不是什么秘密了。早在2018年底举行的英特尔架构日上，英特尔的芯片首席架构师Raja Koduri就对外公布了公司正在着力研发的一件“大事”：一个名为OneAPI的软件编程框架。顾名思义，OneAPI旨在提供一个适用于各类计算架构的统一编程模型和应用程序接口。也就是说，应用程序的开发者只需要开发一次代码，就可以让代码在跨平台的异构系统上执行，底层的硬件架构可以是CPU、GPU、FPGA、神经网络处理器，或者其他针对不同应用的硬件加速器等等。其中2023版本的OneAPI软件现已开源，安装包中主要包括的了icc，ifort，mkl等工具库。此文主要介绍如何安装oneapi和vasp。</p>
+<h2 id="安装oneAPI"><a href="#安装oneAPI" class="headerlink" title="安装oneAPI"></a>安装oneAPI</h2><p>1.环境<br>系统：Ubuntu、CentOS<br>编译器：gcc、ifort </p>
+<p>如果没有安装gcc的话需要安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu: sudo apt-get install gcc -y</span><br><span class="line">Centos: yum install gcc-c++ -y</span><br></pre></td></tr></table></figure>
+<p>下载<a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#gs.rq3dd3">l_BaseKit_p_2023.0.0.25537_offline.sh</a>和<a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#gs.rq3dd3">sh l_HPCKit_p_2023.0.0.25400_offline.sh</a>执行sh l_BaseKit_p_2023.0.0.25537_offline.sh和sh l_HPCKit_p_2023.0.0.25400_offline.sh两个环境都安装好了之后，要在 Linux 系统中配置他们的环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> xxxx/oneapi/setvars.sh intel64 --force</span><br></pre></td></tr></table></figure>
+<p>输入以下命令，检验是否成功，若成功就会显示版本号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Icc -v</span><br><span class="line">ifort -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装vasp"><a href="#安装vasp" class="headerlink" title="安装vasp"></a>安装vasp</h2><p>解压vasp.6.3.2.tgz安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf vasp.6.3.2.tgz</span><br></pre></td></tr></table></figure>
+<p>进入vasp.6.3.2 目录下arch</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /vasp.6.3.2/arch</span><br></pre></td></tr></table></figure>
+<p>这里我们使用intel oneAPI中安装的ifort和mkl数学库将makefile.include.intel文件移动到 vasp.6.3.2 目录下并重命名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> makefile.include.intel ../</span><br><span class="line"><span class="built_in">mv</span> makefile.include.intel makefile.include</span><br></pre></td></tr></table></figure>
+<p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make all</span><br></pre></td></tr></table></figure>
+<p>安装好后，使用下面命令进入vasp.6.1.2&#x2F;bin目录可以看到编译好的 vasp_gam、vasp_ncl 以及 vasp_std这三个文件，然后配置环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=xxxx/vasp.6.3.2/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p>执行一下命令source ~&#x2F;.bashrc重新加载环境变量。<br>运行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vasp_std -v</span><br></pre></td></tr></table></figure>
+<p>如果能显示版本信息则安装成功。</p>
+
+    </article>
+    <!-- license -->
     
-        
-        
-        
-        
+        <div class="license-wrapper">
+            <p>Author：<a href="https://sspaino.github.io">Dr.SHI</a>
+            <p>Link：<a href="https://sspaino.github.io/2023/03/05/3/">https://sspaino.github.io/2023/03/05/3/</a>
+            <p>Publish date：<a href="https://sspaino.github.io/2023/03/05/3/">March 5th 2023, 2:02:22 pm</a>
+            <p>Update date：<a href="https://sspaino.github.io/2023/03/05/3/">March 5th 2023, 9:18:28 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2023/03/05/1/">
-                
-                <span class="abstract-title-text">归园田居·其三</span>
-            </a>
-            <div class="abstract-content">
-                    归园田居·其三
-  （魏晋）陶渊明  
- 种豆南山下，草盛豆苗稀。  
- 晨兴理荒秽，带月荷锄归。  
- 道狭草木长，夕露沾我衣。  
- 衣沾不足惜，但使愿无违。  
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2023/03/05/2/" title="linux下安装lapack和blas的安装">
+                    <div class="nextTitle">linux下安装lapack和blas的安装</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
 
 
+            
 
-            </div>
-            <!-- read more -->
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="poem">poem</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2023/03/05/2/">
-                
-                <span class="abstract-title-text">linux下安装lapack和blas的安装</span>
-            </a>
-            <div class="abstract-content">
-                BLAS，为 Basic Linear Algebra Subprograms 的缩写，即基础线性代数程序集，是一个应用程序接口（API）标准，用以规范发布基础线性代数操作的数值库（如矢量、矩阵乘法等）。该程序集最初发布于1979年，并用于创建更大的数值程序包（如 LAPACK）。在高性能计算领域，BLAS被广泛使用。各软件软件厂商在对blas借口高度优化后发行（openblas、MKL等）。LAPACK，是 Linear Algebra PACKage 的缩写，是以 Fortran语言编写的，用于数值计算的函式集。 LAPACK 提供了丰富的工具函数，可用于诸如解多元线性方程式、线性系...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2023/03/05/3/">
-                
-                <span class="abstract-title-text">linux下安装intel全家桶（oneapi）和vasp</span>
-            </a>
-            <div class="abstract-content">
-                VASP是维也纳大学Hafner小组开发的进行电子结构计算和量子力学-分子动力学模拟软件包。它是目前材料模拟和计算物质科学研究中最流行的商用软件之一。VASP通过近似求解Schrödinger方程得到体系的电子态和能量，既可以在密度泛函理论（DFT）框架内求解Kohn-Sham方程(已实现了混合（hybrid）泛函计算)，也可以在Hartree-Fock（HF）的近似下求解Roothaan方程。此外，VASP也支持格林函数方法（GW准粒子近似，ACFDT-RPA）和微扰理论（二阶Møller-Plesset）。VASP使用平面波基组，电子与离子间的相互作用使用模守恒赝势（NCPP）、超软...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="vasp">vasp</a>
-    
-</div>
+            <!-- utteranc评论 -->
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
     
-    <!-- paginator  -->
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
     
 </main>
 
@@ -618,6 +656,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85oneAPI"><span class="toc-number">1.</span> <span class="toc-text">安装oneAPI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85vasp"><span class="toc-number">2.</span> <span class="toc-text">安装vasp</span></a></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -770,6 +825,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20230305" async></script>
         
         <!-- mermaid -->
         

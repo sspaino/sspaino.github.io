@@ -207,7 +207,11 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript">
@@ -433,14 +437,16 @@
                 <span class="abstract-title-text">C/C++实现HF方法</span>
             </a>
             <div class="abstract-content">
-                TO DO ….
-
+                According to szabo's book in 3.4.6 chapter，there are 12 step for scf
+program.
+1.Specify a molecule (a set of nuclear coordinate \(\{R_{A}\}\),atomic numbers \(\{Z_A\}\),and number os electrons \(N\)) and a basis set \(\{\phi_{\mu}\}\).
+2.Calculate all required molecular integrals \(\{S_{\mu\nu}\}...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/05">
+                <div class="abstract-date" title="Last updated: 2023/03/06">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
                 </div>
                 <!-- tags -->
@@ -583,7 +589,35 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -600,7 +634,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 6
+        Total : 8
         </div>
         <!-- search  -->
         
@@ -616,8 +650,14 @@
             
         
         <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/1/">归园田居·其三</a>
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2023/03/06/8/">linux下安装gcc安装</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2023/03/06/7/">C/C++学习笔记（一）</a>
         </li>
     
         
@@ -629,7 +669,7 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/3/">linux下安装intel全家桶（oneapi）和vasp</a>
+            <a class="archive-post-title" href="/2023/03/05/1/">归园田居·其三</a>
         </li>
     
         
@@ -647,6 +687,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/3/">linux下安装intel全家桶（oneapi）和vasp</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
             <a class="archive-post-title" href="/2023/03/05/5/">C/C++实现HF方法</a>
         </li>
     
@@ -656,19 +702,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
+            <span class="sidebar-tag-name" data-tags="安装">
+                <span class="iconfont-archer">&#xe606;</span>
+                安装
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="poem">
                 <span class="iconfont-archer">&#xe606;</span>
                 poem
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="linux">
-                <span class="iconfont-archer">&#xe606;</span>
-                linux
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vasp">
-                <span class="iconfont-archer">&#xe606;</span>
-                vasp
             </span>
         
             <span class="sidebar-tag-name" data-tags="molecular dynamics">
@@ -679,6 +720,11 @@
             <span class="sidebar-tag-name" data-tags="MDS">
                 <span class="iconfont-archer">&#xe606;</span>
                 MDS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="学习笔记">
+                <span class="iconfont-archer">&#xe606;</span>
+                学习笔记
             </span>
         
             <span class="sidebar-tag-name" data-tags="HF">
@@ -697,14 +743,14 @@
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="interest">
-            <span class="iconfont-archer">&#xe60a;</span>
-            interest
-        </span>
-    
         <span class="sidebar-category-name" data-categories="linux">
             <span class="iconfont-archer">&#xe60a;</span>
             linux
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="interest">
+            <span class="iconfont-archer">&#xe60a;</span>
+            interest
         </span>
     
         <span class="sidebar-category-name" data-categories="python">
@@ -715,6 +761,11 @@
         <span class="sidebar-category-name" data-categories="C/C++">
             <span class="iconfont-archer">&#xe60a;</span>
             C/C++
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="vasp">
+            <span class="iconfont-archer">&#xe60a;</span>
+            vasp
         </span>
     
     </div>

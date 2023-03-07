@@ -432,6 +432,88 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2023/03/07/10/">
+                
+                <span class="abstract-title-text">Fortran学习笔记（二）</span>
+            </a>
+            <div class="abstract-content">
+                Fortran的子程序（subroutine）
+Fortran
+语言中的子程序事实上和C/C++语言的void类型函数类似：把需要重复使用的某些代码都集中成一个子程序，调用时可以给子程序初始化一些变量值从而获得不同的结果。比如说数值微分或者微分方程组的解法一类的数值计算代码就可以写成子程序的形式。
+123456789101112131415161718192021222324!!! 不带初始化变量的子程序subroutine subr1    implicit none    real a, b    integer i    ......    ......end subroutine...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/03/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/07</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="学习笔记">学习笔记</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2023/03/07/9/">
+                
+                <span class="abstract-title-text">Fortran学习笔记（一）</span>
+            </a>
+            <div class="abstract-content">
+                基础知识
+一个完整的 Fortran 代码，一般来说是以 program code_name 开始、以 end
+program code_name
+结束的首末声明，变量声明以及需要执行的命令或者操作三个部分组成。通用的
+Fortran 代码文件的文件后缀可以是 .f90、.f、.g95
+等等，但通常为了统一和适应不同版本的 Fortran 编译环境建议采用 .f90
+后缀。和 C、C++ 语言比较类似，Fortran
+代码也是通过编译执行。比如对如下所示的示例代码执行 gfortran
+code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
+...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2023/03/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/07</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="学习笔记">学习笔记</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2023/03/06/7/">
                 
                 <span class="abstract-title-text">C/C++学习笔记（一）</span>
@@ -600,7 +682,33 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -635,7 +743,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 8
+        Total : 10
         </div>
         <!-- search  -->
         
@@ -651,6 +759,18 @@
             
         
         <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span>
+            <a class="archive-post-title" href="/2023/03/07/10/">Fortran学习笔记（二）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span>
+            <a class="archive-post-title" href="/2023/03/07/9/">Fortran学习笔记（一）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
             <span class="archive-post-date">03/06</span>
             <a class="archive-post-title" href="/2023/03/06/8/">linux下安装gcc安装</a>
         </li>
@@ -664,25 +784,19 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装lapack和blas的安装</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span>
             <a class="archive-post-title" href="/2023/03/05/1/">归园田居·其三</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/4/">Zhu-Nakamura based TSH(the surfacing hopping) python实现</a>
+            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装lapack和blas的安装</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/6/">classical MDS 方法实现</a>
+            <a class="archive-post-title" href="/2023/03/05/4/">Zhu-Nakamura based TSH(the surfacing hopping) python实现</a>
         </li>
     
         
@@ -697,30 +811,21 @@
             <a class="archive-post-title" href="/2023/03/05/5/">C/C++实现HF方法</a>
         </li>
     
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/6/">classical MDS 方法实现</a>
+        </li>
+    
     </div>
 </div>
 
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="安装">
-                <span class="iconfont-archer">&#xe606;</span>
-                安装
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="poem">
                 <span class="iconfont-archer">&#xe606;</span>
                 poem
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="molecular dynamics">
-                <span class="iconfont-archer">&#xe606;</span>
-                molecular dynamics
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MDS">
-                <span class="iconfont-archer">&#xe606;</span>
-                MDS
             </span>
         
             <span class="sidebar-tag-name" data-tags="学习笔记">
@@ -728,9 +833,24 @@
                 学习笔记
             </span>
         
+            <span class="sidebar-tag-name" data-tags="安装">
+                <span class="iconfont-archer">&#xe606;</span>
+                安装
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="molecular dynamics">
+                <span class="iconfont-archer">&#xe606;</span>
+                molecular dynamics
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="HF">
                 <span class="iconfont-archer">&#xe606;</span>
                 HF
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MDS">
+                <span class="iconfont-archer">&#xe606;</span>
+                MDS
             </span>
         
     </div>
@@ -744,14 +864,19 @@
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="linux">
-            <span class="iconfont-archer">&#xe60a;</span>
-            linux
-        </span>
-    
         <span class="sidebar-category-name" data-categories="interest">
             <span class="iconfont-archer">&#xe60a;</span>
             interest
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Fortran">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Fortran
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="linux">
+            <span class="iconfont-archer">&#xe60a;</span>
+            linux
         </span>
     
         <span class="sidebar-category-name" data-categories="python">
@@ -759,14 +884,14 @@
             python
         </span>
     
-        <span class="sidebar-category-name" data-categories="C/C++">
-            <span class="iconfont-archer">&#xe60a;</span>
-            C/C++
-        </span>
-    
         <span class="sidebar-category-name" data-categories="vasp">
             <span class="iconfont-archer">&#xe60a;</span>
             vasp
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="C/C++">
+            <span class="iconfont-archer">&#xe60a;</span>
+            C/C++
         </span>
     
     </div>

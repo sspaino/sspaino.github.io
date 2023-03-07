@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://sspaino.github.io/categories/C-C/index.html">
+<meta property="og:url" content="https://sspaino.github.io/categories/Fortran/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Dr.SHI">
@@ -432,23 +432,22 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2023/03/06/7/">
+            <a class="abstract-title" href="/2023/03/07/10/">
                 
-                <span class="abstract-title-text">C/C++学习笔记（一）</span>
+                <span class="abstract-title-text">Fortran学习笔记（二）</span>
             </a>
             <div class="abstract-content">
-                1.cpp 关键词
-参考
-2.cpp 指针
-每一个变量都有一个内存位置，每一个内存位置都定义了可使用连字号（&amp;）运算符访问的地址，它表示了在内存中的一个地址。
-12345678910111213141516#include &lt;iostream&gt;using namespace std;int main()&#123;    int var1;    int var2[10];    cout &lt;&lt; &quot;var1 变量的地址： &quot;;    cout &lt;&lt; &amp;var1 &lt;&lt; endl;    cout &lt;&...
+                Fortran的子程序（subroutine）
+Fortran
+语言中的子程序事实上和C/C++语言的void类型函数类似：把需要重复使用的某些代码都集中成一个子程序，调用时可以给子程序初始化一些变量值从而获得不同的结果。比如说数值微分或者微分方程组的解法一类的数值计算代码就可以写成子程序的形式。
+123456789101112131415161718192021222324!!! 不带初始化变量的子程序subroutine subr1    implicit none    real a, b    integer i    ......    ......end subroutine...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/06</span>
+                <div class="abstract-date" title="Last updated: 2023/03/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/07</span>
                 </div>
                 <!-- tags -->
                 
@@ -471,65 +470,35 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2023/03/05/5/">
+            <a class="abstract-title" href="/2023/03/07/9/">
                 
-                <span class="abstract-title-text">C/C++实现HF方法</span>
+                <span class="abstract-title-text">Fortran学习笔记（一）</span>
             </a>
             <div class="abstract-content">
-                According to szabo's book in 3.4.6 chapter，there are 12 step for scf
-program.
-1.Specify a molecule (a set of nuclear coordinate \(\{R_{A}\}\),atomic numbers \(\{Z_A\}\),and number os electrons \(N\)) and a basis set \(\{\phi_{\mu}\}\).
-2.Calculate all required molecular integrals \(\{S_{\mu\nu}\}...
+                基础知识
+一个完整的 Fortran 代码，一般来说是以 program code_name 开始、以 end
+program code_name
+结束的首末声明，变量声明以及需要执行的命令或者操作三个部分组成。通用的
+Fortran 代码文件的文件后缀可以是 .f90、.f、.g95
+等等，但通常为了统一和适应不同版本的 Fortran 编译环境建议采用 .f90
+后缀。和 C、C++ 语言比较类似，Fortran
+代码也是通过编译执行。比如对如下所示的示例代码执行 gfortran
+code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
+...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
+                <div class="abstract-date" title="Last updated: 2023/03/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/07</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="HF">HF</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2023/03/05/6/">
-                
-                <span class="abstract-title-text">classical MDS 方法实现</span>
-            </a>
-            <div class="abstract-content">
-                TO DO ....
-
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/03/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="MDS">MDS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="学习笔记">学习笔记</a>
     
 </div>
 

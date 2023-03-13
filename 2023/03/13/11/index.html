@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Dr.SHI">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Dr.SHI">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="此文主要介绍作者用python实现自动重新排序的脚本 1.依赖 python &gt;&#x3D; 3.7 numpy 矩阵计算库 scipy 数学计算库 re 正则匹配库 主体函数如下所示 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556def hu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实现自动重排分子原子标号">
+<meta property="og:url" content="https://sspaino.github.io/2023/03/13/11/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="此文主要介绍作者用python实现自动重新排序的脚本 1.依赖 python &gt;&#x3D; 3.7 numpy 矩阵计算库 scipy 数学计算库 re 正则匹配库 主体函数如下所示 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556def hu">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-13T05:29:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T06:58:47.910Z">
+<meta property="article:author" content="Dr.SHI">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>python实现自动重排分子原子标号 · Dr.SHI&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20230305" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20230305" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20230305" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20230305" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20230305" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Dr.SHI's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Dr.SHI&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">python实现自动重排分子原子标号</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/wallhaven-l3xk6q.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                python实现自动重排分子原子标号
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="学习笔记">学习笔记</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.2k</span>Reading time: <span class="post-count reading-time">10 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2023/03/13</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>此文主要介绍作者用python实现自动重新排序的脚本</p>
+<p>1.依赖 python &gt;= 3.7<br />
+numpy 矩阵计算库<br />
+scipy 数学计算库<br />
+re 正则匹配库</p>
+<p>主体函数如下所示 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hungarian</span>(<span class="params">A, B</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Hungarian reordering.</span></span><br><span class="line"><span class="string">    Assume A and B are coordinates for atoms of SAME type only</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># should be kabasch here i think</span></span><br><span class="line">    distances = cdist(A, B, <span class="string">&quot;euclidean&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Perform Hungarian analysis on distance matrix between atoms of 1st</span></span><br><span class="line">    <span class="comment"># structure and trial structure</span></span><br><span class="line">    indices_a, indices_b = linear_sum_assignment(distances)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> indices_b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reorder_hungarian</span>(<span class="params">p_atoms, q_atoms, p_coord, q_coord</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Re-orders the input atom list and xyz coordinates using the Hungarian</span></span><br><span class="line"><span class="string">    method (using optimized column results)</span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    p_atoms : array</span></span><br><span class="line"><span class="string">        (N,1) matrix, where N is points holding the atoms&#x27; names</span></span><br><span class="line"><span class="string">    p_atoms : array</span></span><br><span class="line"><span class="string">        (N,1) matrix, where N is points holding the atoms&#x27; names</span></span><br><span class="line"><span class="string">    p_coord : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension</span></span><br><span class="line"><span class="string">    q_coord : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension</span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">    view_reorder : array</span></span><br><span class="line"><span class="string">             (N,1) matrix, reordered indexes of atom alignment based on the</span></span><br><span class="line"><span class="string">             coordinates of the atoms</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Find unique atoms</span></span><br><span class="line">    unique_atoms = np.unique(p_atoms)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># generate full view from q shape to fill in atom view on the fly</span></span><br><span class="line">    view_reorder = np.zeros(q_atoms.shape, dtype=<span class="built_in">int</span>)</span><br><span class="line">    view_reorder -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> atom <span class="keyword">in</span> unique_atoms:</span><br><span class="line">        (p_atom_idx,) = np.where(p_atoms == atom)</span><br><span class="line">        (q_atom_idx,) = np.where(q_atoms == atom)</span><br><span class="line"></span><br><span class="line">        A_coord = p_coord[p_atom_idx]</span><br><span class="line">        B_coord = q_coord[q_atom_idx]</span><br><span class="line"></span><br><span class="line">        view = hungarian(A_coord, B_coord)</span><br><span class="line">        view_reorder[p_atom_idx] = q_atom_idx[view]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> view_reorder</span><br></pre></td></tr></table></figure>
+接下来我们需要使用这两个函数对不同序号的分子尽心重新排列，首先准备两个测试使用的苯分子的xyz文件如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">coordinate 1</span><br><span class="line">C                  0.00000000    0.00000000    0.00000000</span><br><span class="line">C                  1.39516000    0.00000000    0.00000000</span><br><span class="line">C                  2.09269800    1.20775100    0.00000000</span><br><span class="line">C                  1.39504400    2.41626000   -0.00119900</span><br><span class="line">C                  0.00021900    2.41618200   -0.00167800</span><br><span class="line">C                 -0.69738200    1.20797600   -0.00068200</span><br><span class="line">H                 -0.54975900   -0.95231700    0.00045000</span><br><span class="line">H                  1.94466800   -0.95251300    0.00131500</span><br><span class="line">H                  3.19237800    1.20783100    0.00063400</span><br><span class="line">H                  1.94524400    3.36840300   -0.00125800</span><br><span class="line">H                 -0.54990300    3.36846300   -0.00263100</span><br><span class="line">H                 -1.79698600    1.20815900   -0.00086200</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">6</span><br><span class="line">coordinate2</span><br><span class="line">C                  0.00000000    0.00000000    0.00000000</span><br><span class="line">C                  2.09269800    1.20775100    0.00000000</span><br><span class="line">C                  1.39516000    0.00000000    0.00000000</span><br><span class="line">C                  1.39504400    2.41626000   -0.00119900</span><br><span class="line">C                  0.00021900    2.41618200   -0.00167800</span><br><span class="line">C                 -0.69738200    1.20797600   -0.00068200</span><br><span class="line">H                 -0.54975900   -0.95231700    0.00045000</span><br><span class="line">H                  1.94466800   -0.95251300    0.00131500</span><br><span class="line">H                  3.19237800    1.20783100    0.00063400</span><br><span class="line">H                  1.94524400    3.36840300   -0.00125800</span><br><span class="line">H                 -0.54990300    3.36846300   -0.00263100</span><br><span class="line">H                 -1.79698600    1.20815900   -0.00086200</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以将上述两个文件粘贴复制到文件中命名为c6h6.xyz和c6h62.xyz，首先我们需要将xyz文件中的构型和分子的标号读取到矩阵中，程序中使用python的numpy库来保存作坐标和原子标号信息。这里我将给出一个简单实例如何从xyz文件中读取结构。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> re <span class="comment">#引入正则匹配库，正则匹配库是python自带的库不需要额外安装</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="comment">#引入numpy矩阵库，我们需要使用numpy库来保存矩阵，以及尽心矩阵计算</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_coordinate</span>(<span class="params">filename</span>):<span class="comment">#定义一个函数，其中参数需要一个文件名，这里我们要输入的是xyz文件</span></span><br><span class="line">    atoms = [] <span class="comment">#定义一个列表，用来报错分子的标号</span></span><br><span class="line">    coordinate = [] <span class="comment">#定义一个列表用来保存每一个原子的xyz坐标</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> file: <span class="comment">#打开xyz文件</span></span><br><span class="line">            regex = re.search(<span class="string">&quot;[a-zA-Z]&#123;1,2&#125;(\s+-?\d+\.\d+)&#123;3&#125;&quot;</span>,line)<span class="comment">#使用正则匹配文件中每一行的字符的格式，这里是一个通用的正则匹配形式，匹配每一行xyz坐标以及分子的标号</span></span><br><span class="line">            <span class="keyword">if</span> regex:</span><br><span class="line">                <span class="comment">#这里我们一下结果</span></span><br><span class="line">                <span class="built_in">print</span>(line)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filename1 = <span class="string">&quot;c6h6.xyz&quot;</span></span><br><span class="line">read_coordinate(filename1)</span><br></pre></td></tr></table></figure>
+<p>运行以上代码的到结果如下所示 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">C                  0.00000000    0.00000000    0.00000000</span><br><span class="line"></span><br><span class="line">C                  1.39516000    0.00000000    0.00000000</span><br><span class="line"></span><br><span class="line">C                  2.09269800    1.20775100    0.00000000</span><br><span class="line"></span><br><span class="line">C                  1.39504400    2.41626000   -0.00119900</span><br><span class="line"></span><br><span class="line">C                  0.00021900    2.41618200   -0.00167800</span><br><span class="line"></span><br><span class="line">C                 -0.69738200    1.20797600   -0.00068200</span><br><span class="line"></span><br><span class="line">H                 -0.54975900   -0.95231700    0.00045000</span><br><span class="line"></span><br><span class="line">H                  1.94466800   -0.95251300    0.00131500</span><br><span class="line"></span><br><span class="line">H                  3.19237800    1.20783100    0.00063400</span><br><span class="line"></span><br><span class="line">H                  1.94524400    3.36840300   -0.00125800</span><br><span class="line"></span><br><span class="line">H                 -0.54990300    3.36846300   -0.00263100</span><br><span class="line"></span><br><span class="line">H                 -1.79698600    1.20815900   -0.00086200</span><br></pre></td></tr></table></figure>
+注意以上结果只是匹配到的字符，因此接下来我门需要将这些匹配的字符保存在矩阵中以便使用。
+我们继续完善读取代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> re <span class="comment">#引入正则匹配库，正则匹配库是python自带的库不需要额外安装</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np<span class="comment">#引入numpy矩阵库，我们需要使用numpy库来保存矩阵，以及尽心矩阵计算</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_coordinate</span>(<span class="params">filename</span>):<span class="comment">#定义一个函数，其中参数需要一个文件名，这里我们要输入的是xyz文件</span></span><br><span class="line">    atoms = [] <span class="comment">#定义一个列表，用来报错分子的标号</span></span><br><span class="line">    coordinate = [] <span class="comment">#定义一个列表用来保存每一个原子的xyz坐标</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> file: <span class="comment">#打开xyz文件</span></span><br><span class="line">            regex = re.search(<span class="string">&quot;[a-zA-Z]&#123;1,2&#125;(\s+-?\d+\.\d+)&#123;3&#125;&quot;</span>,line)<span class="comment">#使用正则匹配文件中每一行的字符的格式，这里是一个通用的正则匹配形式，匹配每一行xyz坐标以及分子的标号</span></span><br><span class="line">            <span class="keyword">if</span> regex:</span><br><span class="line">                <span class="comment">#这里我们一下结果</span></span><br><span class="line">                <span class="comment">#print(line)</span></span><br><span class="line">                coordiante.append([<span class="built_in">float</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> regex.group().split()[<span class="number">1</span>:<span class="number">4</span>]])<span class="comment">#使用列表推导</span></span><br><span class="line">                atoms.append(regex.group().split()[<span class="number">0</span>])</span><br><span class="line">    coordiante = np.array(coordiante)<span class="comment">#将坐标保存到矩阵中</span></span><br><span class="line">    atoms = np.array(atoms)<span class="comment">#将分子标号保存到矩阵中</span></span><br><span class="line">    <span class="keyword">return</span> atoms，coordiante <span class="comment">#返回分子标号矩阵，和坐标矩阵</span></span><br><span class="line"></span><br><span class="line">filename1 = <span class="string">&quot;c6h6.xyz&quot;</span></span><br><span class="line">atoms，coordiante = read_coordinate(filename1) <span class="comment">#通过函数返回值，我们的到原子标号坐标和分子构型坐标</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这里我们已经完成怎么从xyz文件中读取分子坐标和序号并保存到矩阵中，从上面的一号坐标和二号坐标和中我们可以看出来，二号坐标的2号C和3号C的循序发生的发生了对调，因此我们需要对坐标二号从新排序，让二号的坐标顺序和一号相同，便于后续我们使用构型进行线性内插，做势能面。下面展示完整代码，对分子构型进行重新排序。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> re <span class="comment">#引入正则匹配库，正则匹配库是python自带的库不需要额外安装</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np<span class="comment">#引入numpy矩阵库，我们需要使用numpy库来保存矩阵，以及尽心矩阵计算</span></span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> linear_sum_assignment <span class="comment">#引入scipy数学计算库</span></span><br><span class="line"><span class="keyword">from</span> scipy.spatial.distance <span class="keyword">import</span> cdist</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置矩阵的显示方式</span></span><br><span class="line">np.set_printoptions(threshold=<span class="number">10000000000</span>,linewidth=<span class="number">1000000000</span>,precision=<span class="number">8</span>,suppress=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_geo</span>(<span class="params">coordinate,atoms</span>):</span><br><span class="line">    natom =<span class="built_in">len</span>(atoms)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(natom):</span><br><span class="line">        symbol = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">format</span>(atoms[i]))</span><br><span class="line">        coordinate_x = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">format</span>(coordinate[i][<span class="number">0</span>], <span class="string">&#x27;&gt;20.10f&#x27;</span>))</span><br><span class="line">        coordinate_y = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">format</span>(coordinate[i][<span class="number">1</span>], <span class="string">&#x27;&gt;20.10f&#x27;</span>))</span><br><span class="line">        coordinate_z = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">format</span>(coordinate[i][<span class="number">2</span>], <span class="string">&#x27;&gt;20.10f&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(symbol + coordinate_x + coordinate_y + coordinate_z)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">centeroid_translation</span>(<span class="params">coordinate</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    centeroid coordinate can be got equal to original coordinate minus centroid</span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    coordinate : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension.</span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">        coordinate - center</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    center = centroid(coordinate)</span><br><span class="line">    <span class="keyword">return</span> coordinate - center</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reorder_distance</span>(<span class="params">p_atoms, q_atoms, p_coord, q_coord</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Re-orders the input atom list and xyz coordinates by atom type and then by</span></span><br><span class="line"><span class="string">    distance of each atom from the centroid.</span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    atoms : array</span></span><br><span class="line"><span class="string">        (N,1) matrix, where N is points holding the atoms&#x27; names</span></span><br><span class="line"><span class="string">    coord : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension</span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">    atoms_reordered : array</span></span><br><span class="line"><span class="string">        (N,1) matrix, where N is points holding the ordered atoms&#x27; names</span></span><br><span class="line"><span class="string">    coords_reordered : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension (rows re-ordered)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Find unique atoms</span></span><br><span class="line">    unique_atoms = np.unique(p_atoms)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># generate full view from q shape to fill in atom view on the fly</span></span><br><span class="line">    view_reorder = np.zeros(q_atoms.shape, dtype=<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> atom <span class="keyword">in</span> unique_atoms:</span><br><span class="line"></span><br><span class="line">        (p_atom_idx,) = np.where(p_atoms == atom)</span><br><span class="line">        (q_atom_idx,) = np.where(q_atoms == atom)</span><br><span class="line"></span><br><span class="line">        A_coord = p_coord[p_atom_idx]</span><br><span class="line">        B_coord = q_coord[q_atom_idx]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Calculate distance from each atom to centroid</span></span><br><span class="line">        A_norms = np.linalg.norm(A_coord, axis=<span class="number">1</span>)</span><br><span class="line">        B_norms = np.linalg.norm(B_coord, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        reorder_indices_A = np.argsort(A_norms)</span><br><span class="line">        reorder_indices_B = np.argsort(B_norms)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Project the order of P onto Q</span></span><br><span class="line">        translator = np.argsort(reorder_indices_A)</span><br><span class="line">        view = reorder_indices_B[translator]</span><br><span class="line">        view_reorder[p_atom_idx] = q_atom_idx[view]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> view_reorder</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hungarian</span>(<span class="params">A, B</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Hungarian reordering.</span></span><br><span class="line"><span class="string">    Assume A and B are coordinates for atoms of SAME type only</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># should be kabasch here i think</span></span><br><span class="line">    distances = cdist(A, B, <span class="string">&quot;euclidean&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Perform Hungarian analysis on distance matrix between atoms of 1st</span></span><br><span class="line">    <span class="comment"># structure and trial structure</span></span><br><span class="line">    indices_a, indices_b = linear_sum_assignment(distances)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> indices_b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reorder_hungarian</span>(<span class="params">p_atoms, q_atoms, p_coord, q_coord</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Re-orders the input atom list and xyz coordinates using the Hungarian</span></span><br><span class="line"><span class="string">    method (using optimized column results)</span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    p_atoms : array</span></span><br><span class="line"><span class="string">        (N,1) matrix, where N is points holding the atoms&#x27; names</span></span><br><span class="line"><span class="string">    p_atoms : array</span></span><br><span class="line"><span class="string">        (N,1) matrix, where N is points holding the atoms&#x27; names</span></span><br><span class="line"><span class="string">    p_coord : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension</span></span><br><span class="line"><span class="string">    q_coord : array</span></span><br><span class="line"><span class="string">        (N,D) matrix, where N is points and D is dimension</span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">    view_reorder : array</span></span><br><span class="line"><span class="string">             (N,1) matrix, reordered indexes of atom alignment based on the</span></span><br><span class="line"><span class="string">             coordinates of the atoms</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Find unique atoms</span></span><br><span class="line">    unique_atoms = np.unique(p_atoms)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># generate full view from q shape to fill in atom view on the fly</span></span><br><span class="line">    view_reorder = np.zeros(q_atoms.shape, dtype=<span class="built_in">int</span>)</span><br><span class="line">    view_reorder -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> atom <span class="keyword">in</span> unique_atoms:</span><br><span class="line">        (p_atom_idx,) = np.where(p_atoms == atom)</span><br><span class="line">        (q_atom_idx,) = np.where(q_atoms == atom)</span><br><span class="line"></span><br><span class="line">        A_coord = p_coord[p_atom_idx]</span><br><span class="line">        B_coord = q_coord[q_atom_idx]</span><br><span class="line"></span><br><span class="line">        view = hungarian(A_coord, B_coord)</span><br><span class="line">        view_reorder[p_atom_idx] = q_atom_idx[view]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> view_reorder</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_coordinate</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    读取分子标号和分子构型函数</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">    atoms : array</span></span><br><span class="line"><span class="string">        原子标号矩阵</span></span><br><span class="line"><span class="string">    coordiante : array</span></span><br><span class="line"><span class="string">        分子构型矩阵</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    atoms = [] </span><br><span class="line">    coordiante = []</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">            regex = re.search(<span class="string">&quot;[a-zA-Z]&#123;1,2&#125;(\s+-?\d+\.\d+)&#123;3&#125;&quot;</span>,line)</span><br><span class="line">            <span class="keyword">if</span> regex:</span><br><span class="line">                coordiante.append([<span class="built_in">float</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> regex.group().split()[<span class="number">1</span>:<span class="number">4</span>]])</span><br><span class="line">                atoms.append(regex.group().split()[<span class="number">0</span>])</span><br><span class="line">    coordiante = np.array(coordiante)</span><br><span class="line">    atoms = np.array(atoms)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> atoms,coordiante</span><br><span class="line"></span><br><span class="line">filename1 = <span class="string">&quot;c6h6.xyz&quot;</span></span><br><span class="line">filename2 = <span class="string">&quot;c6h62.xyz&quot;</span></span><br><span class="line">atoms1,coordiante1 = read_coordinate(filename1) <span class="comment">#读取构型和分子标号</span></span><br><span class="line">atoms2,coordiante2 = read_coordinate(filename2) </span><br><span class="line">order = reorder_hungarian(atoms1,atoms2,coordiante1,coordiante2) <span class="comment">#使用函数的到重新排序后的顺序</span></span><br><span class="line">new_coordiante2 = coordiante2[order] <span class="comment">#对二号坐标重新排序的到排序后的分子构型矩阵</span></span><br><span class="line">new_atoms = atoms2[order]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;重新排序&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(order)</span><br><span class="line"><span class="built_in">print</span>(new_atoms)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;重新排序的构型&quot;</span>)</span><br><span class="line">print_geo(new_coordiante2,new_atoms)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure> 需要使用的同学自行修改代码。</p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://sspaino.github.io">Dr.SHI</a>
+            <p>Link：<a href="https://sspaino.github.io/2023/03/13/11/">https://sspaino.github.io/2023/03/13/11/</a>
+            <p>Publish date：<a href="https://sspaino.github.io/2023/03/13/11/">March 13th 2023, 2:29:00 pm</a>
+            <p>Update date：<a href="https://sspaino.github.io/2023/03/13/11/">March 13th 2023, 3:58:47 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2023/03/07/10/" title="Fortran学习笔记（二）">
+                    <div class="prevTitle">Fortran学习笔记（二）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:shiweiliang@stumail.nwu.edu.cn" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/sspaino" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span></span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2023 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span>
+            <a class="archive-post-title" href="/2023/03/13/11/">python实现自动重排分子原子标号</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span>
+            <a class="archive-post-title" href="/2023/03/07/10/">Fortran学习笔记（二）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span>
+            <a class="archive-post-title" href="/2023/03/07/9/">Fortran学习笔记（一）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2023/03/06/8/">linux下安装gcc安装</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span>
+            <a class="archive-post-title" href="/2023/03/06/7/">C/C++学习笔记（一）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/1/">归园田居·其三</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装lapack和blas的安装</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/3/">linux下安装intel全家桶（oneapi）和vasp</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/4/">Zhu-Nakamura based TSH(the surfacing hopping) python实现</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/5/">C/C++实现HF方法</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2023/03/05/6/">classical MDS 方法实现</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="学习笔记">
+                <span class="iconfont-archer">&#xe606;</span>
+                学习笔记
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="poem">
+                <span class="iconfont-archer">&#xe606;</span>
+                poem
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="安装">
+                <span class="iconfont-archer">&#xe606;</span>
+                安装
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="molecular dynamics">
+                <span class="iconfont-archer">&#xe606;</span>
+                molecular dynamics
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="HF">
+                <span class="iconfont-archer">&#xe606;</span>
+                HF
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MDS">
+                <span class="iconfont-archer">&#xe606;</span>
+                MDS
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Fortran">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Fortran
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Python">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Python
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="interest">
+            <span class="iconfont-archer">&#xe60a;</span>
+            interest
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="linux">
+            <span class="iconfont-archer">&#xe60a;</span>
+            linux
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="vasp">
+            <span class="iconfont-archer">&#xe60a;</span>
+            vasp
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="python">
+            <span class="iconfont-archer">&#xe60a;</span>
+            python
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="C/C++">
+            <span class="iconfont-archer">&#xe60a;</span>
+            C/C++
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://sspaino.github.io",
+        root: siteMetaRoot,
+        author: "Dr.SHI"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20230305"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20230305"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20230305" async></script>
+        
+        <!-- mermaid -->
+        
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({theme: 'dark'});
+                }
+            </script>
+        
+    </body>
+</html>

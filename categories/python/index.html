@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://sspaino.github.io/categories/python/index.html">
+<meta property="og:url" content="https://sspaino.github.io/categories/Python/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Dr.SHI">
@@ -432,34 +432,31 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2023/03/05/4/">
+            <a class="abstract-title" href="/2023/03/13/11/">
                 
-                <span class="abstract-title-text">Zhu-Nakamura based surface hopping的python实现</span>
+                <span class="abstract-title-text">python实现自动重排分子原子标号</span>
             </a>
             <div class="abstract-content">
-                此文主要介绍如何用python实现Zhu-Nakamura based surface
-hopping的实现，这里使用python语言实现时为了方便理解，并且python语言作为动态解释性语言其学习成本相对于编译性语言低，并且python语言的numpy集成了大部分计算所需要的线性代数和矩阵运算的函数便于计算和操作矩阵。
-依赖
-python=3.9 numpy=1.21.5
-主体框架介绍
-surface hopping方法主要是将分子放在单一是势能面上使用Velocity Verlet
-对原子核的位置进行积分随设置的时间步长更新分子中原子核的位置。也就是所谓的on
-the
-fly方式，这...
+                此文主要介绍作者用python实现自动重新排序的脚本
+1.依赖 python &gt;= 3.7
+numpy 矩阵计算库
+scipy 数学计算库
+re 正则匹配库
+主体函数如下所示 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556def hungarian(A, B):    &quot;&quot;&quot;    Hungarian reordering.    Assume A and B are coordinates f...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/04/18">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/05</span>
+                <div class="abstract-date" title="Last updated: 2023/03/13">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/13</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="molecular dynamics">molecular dynamics</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="学习笔记">学习笔记</a>
     
 </div>
 
@@ -614,57 +611,7 @@ fly方式，这...
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -713,7 +660,7 @@ fly方式，这...
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 14
+        Total : 10
         </div>
         <!-- search  -->
         
@@ -778,37 +725,13 @@ fly方式，这...
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/1/">归园田居·其三</a>
+            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装intel全家桶（oneapi）和vasp</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装lapack和blas的安装</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/4/">Zhu-Nakamura based surface hopping的python实现</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/3/">linux下安装intel全家桶（oneapi）和vasp</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/5/">C/C++实现HF方法</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/6/">classical MDS 方法实现</a>
+            <a class="archive-post-title" href="/2023/03/05/1/">linux下安装lapack和blas的安装</a>
         </li>
     
     </div>
@@ -816,11 +739,6 @@ fly方式，这...
 
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
-        
-            <span class="sidebar-tag-name" data-tags="poem">
-                <span class="iconfont-archer">&#xe606;</span>
-                poem
-            </span>
         
             <span class="sidebar-tag-name" data-tags="学习笔记">
                 <span class="iconfont-archer">&#xe606;</span>
@@ -830,21 +748,6 @@ fly方式，这...
             <span class="sidebar-tag-name" data-tags="安装">
                 <span class="iconfont-archer">&#xe606;</span>
                 安装
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="molecular dynamics">
-                <span class="iconfont-archer">&#xe606;</span>
-                molecular dynamics
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="HF">
-                <span class="iconfont-archer">&#xe606;</span>
-                HF
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MDS">
-                <span class="iconfont-archer">&#xe606;</span>
-                MDS
             </span>
         
     </div>
@@ -858,14 +761,9 @@ fly方式，这...
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="interest">
+        <span class="sidebar-category-name" data-categories="Python">
             <span class="iconfont-archer">&#xe60a;</span>
-            interest
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="Fortran">
-            <span class="iconfont-archer">&#xe60a;</span>
-            Fortran
+            Python
         </span>
     
         <span class="sidebar-category-name" data-categories="molpro">
@@ -873,9 +771,9 @@ fly方式，这...
             molpro
         </span>
     
-        <span class="sidebar-category-name" data-categories="Python">
+        <span class="sidebar-category-name" data-categories="Fortran">
             <span class="iconfont-archer">&#xe60a;</span>
-            Python
+            Fortran
         </span>
     
         <span class="sidebar-category-name" data-categories="libcint">
@@ -888,14 +786,9 @@ fly方式，这...
             3Dmol
         </span>
     
-        <span class="sidebar-category-name" data-categories="linux">
+        <span class="sidebar-category-name" data-categories="C/C++">
             <span class="iconfont-archer">&#xe60a;</span>
-            linux
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="python">
-            <span class="iconfont-archer">&#xe60a;</span>
-            python
+            C/C++
         </span>
     
         <span class="sidebar-category-name" data-categories="vasp">
@@ -903,9 +796,9 @@ fly方式，这...
             vasp
         </span>
     
-        <span class="sidebar-category-name" data-categories="C/C++">
+        <span class="sidebar-category-name" data-categories="linux">
             <span class="iconfont-archer">&#xe60a;</span>
-            C/C++
+            linux
         </span>
     
     </div>

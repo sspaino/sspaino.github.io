@@ -437,10 +437,7 @@
                 <span class="abstract-title-text">Fortran学习笔记（二）</span>
             </a>
             <div class="abstract-content">
-                Fortran的子程序（subroutine）
-Fortran
-语言中的子程序事实上和C/C++语言的void类型函数类似：把需要重复使用的某些代码都集中成一个子程序，调用时可以给子程序初始化一些变量值从而获得不同的结果。比如说数值微分或者微分方程组的解法一类的数值计算代码就可以写成子程序的形式。
-123456789101112131415161718192021222324!!! 不带初始化变量的子程序subroutine subr1    implicit none    real a, b    integer i    ......    ......end subroutine...
+                
             </div>
             <!-- read more -->
             
@@ -475,16 +472,7 @@ Fortran
                 <span class="abstract-title-text">Fortran学习笔记（一）</span>
             </a>
             <div class="abstract-content">
-                基础知识
-一个完整的 Fortran 代码，一般来说是以 program code_name 开始、以 end
-program code_name
-结束的首末声明，变量声明以及需要执行的命令或者操作三个部分组成。通用的
-Fortran 代码文件的文件后缀可以是 .f90、.f、.g95
-等等，但通常为了统一和适应不同版本的 Fortran 编译环境建议采用 .f90
-后缀。和 C、C++ 语言比较类似，Fortran
-代码也是通过编译执行。比如对如下所示的示例代码执行 gfortran
-code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
-...
+                
             </div>
             <!-- read more -->
             
@@ -648,11 +636,6 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
         
         
         
-        
-        
-        
-        
-        
     
         
         
@@ -702,7 +685,7 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 10
+        Total : 9
         </div>
         <!-- search  -->
         
@@ -718,20 +701,14 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
             
         
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span>
-            <a class="archive-post-title" href="/2023/05/10/14/">3dmol测试</a>
+            <span class="archive-post-date">03/30</span>
+            <a class="archive-post-title" href="/2023/03/30/13/">libcint基础使用</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/30</span>
             <a class="archive-post-title" href="/2023/03/30/12/">molpro基础使用</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/30</span>
-            <a class="archive-post-title" href="/2023/03/30/13/">libcint基础使用</a>
         </li>
     
         
@@ -767,13 +744,13 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装intel全家桶（oneapi）和vasp</a>
+            <a class="archive-post-title" href="/2023/03/05/1/">linux下安装lapack和blas的安装</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
-            <a class="archive-post-title" href="/2023/03/05/1/">linux下安装lapack和blas的安装</a>
+            <a class="archive-post-title" href="/2023/03/05/2/">linux下安装intel全家桶（oneapi）和vasp</a>
         </li>
     
     </div>
@@ -782,14 +759,14 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="学习笔记">
-                <span class="iconfont-archer">&#xe606;</span>
-                学习笔记
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="安装">
                 <span class="iconfont-archer">&#xe606;</span>
                 安装
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="学习笔记">
+                <span class="iconfont-archer">&#xe606;</span>
+                学习笔记
             </span>
         
     </div>
@@ -803,19 +780,9 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Python">
+        <span class="sidebar-category-name" data-categories="linux">
             <span class="iconfont-archer">&#xe60a;</span>
-            Python
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="molpro">
-            <span class="iconfont-archer">&#xe60a;</span>
-            molpro
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="Fortran">
-            <span class="iconfont-archer">&#xe60a;</span>
-            Fortran
+            linux
         </span>
     
         <span class="sidebar-category-name" data-categories="libcint">
@@ -823,14 +790,9 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
             libcint
         </span>
     
-        <span class="sidebar-category-name" data-categories="3Dmol">
+        <span class="sidebar-category-name" data-categories="Fortran">
             <span class="iconfont-archer">&#xe60a;</span>
-            3Dmol
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="C/C++">
-            <span class="iconfont-archer">&#xe60a;</span>
-            C/C++
+            Fortran
         </span>
     
         <span class="sidebar-category-name" data-categories="vasp">
@@ -838,9 +800,19 @@ code_name.f90 -o code_name 即可生成可执行程序 code_name，再执行
             vasp
         </span>
     
-        <span class="sidebar-category-name" data-categories="linux">
+        <span class="sidebar-category-name" data-categories="molpro">
             <span class="iconfont-archer">&#xe60a;</span>
-            linux
+            molpro
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="C/C++">
+            <span class="iconfont-archer">&#xe60a;</span>
+            C/C++
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Python">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Python
         </span>
     
     </div>
